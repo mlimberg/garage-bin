@@ -29,17 +29,24 @@ app.get('/', (request, response) => {
   })
 })
 
-
-//
 app.get('/api/v1/items', (request, response) => {
-  response.status(200).send(app.locals.items)
+  const { items } = app.locals
+  if(items) {
+    response.status(200).send(app.locals.items)
+  } else {
+    response.status(404).send({ error: 'Unable to find what you\'re looking for' })
+  }
 })
 
 app.get('/api/v1/items/:id', (request, response) => {
   const { id } = request.params
   const currentItem = app.locals.items.find(item => item.id == parseInt(id))
 
-  response.status(200).send(currentItem)
+  if(currentItem) {
+    response.status(200).send(currentItem)
+  } else {
+    response.status(404).send({ error: 'Item not found'})
+  }
 })
 
 app.post('/api/v1/items', (request, response) => {
@@ -50,7 +57,7 @@ app.post('/api/v1/items', (request, response) => {
     items.push(item)
     response.status(200).send(items)
   } else {
-    response.status(404).send({ error: 'Item could not be saved'})
+    response.status(400).send({ error: 'Item was not saved'})
   }
 })
 
@@ -63,8 +70,13 @@ app.put('/api/v1/items/:id', (request, response) => {
     }
     return item
   })
-  app.locals.items = updated
-  response.status(200).send(app.locals.items)
+
+  if(updated.length > 0) {
+    app.locals.items = updated
+    response.status(200).send(app.locals.items)
+  } else {
+    response.status(400).send({ error: 'Item was not saved'})
+  }
 })
 
 app.delete('/api/v1/items/:id', (request, response) => {
@@ -72,8 +84,12 @@ app.delete('/api/v1/items/:id', (request, response) => {
   const updated = app.locals.items.filter(item => {
     return item.id !== parseInt(id)
   })
-  app.locals.items = updated
-  response.status(200).send(app.locals.items)
+  if(updated) {
+    app.locals.items = updated
+    response.status(200).send(app.locals.items)
+  } else {
+    response.status(400).send({ error: 'item was not deleted' })
+  }
 })
 
 if(!module.parent) {
