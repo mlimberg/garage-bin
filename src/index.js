@@ -1,6 +1,8 @@
 let stats = { sparkling: 0, dusty: 0, rancid: 0}
 const quality = ['sparkling', 'dusty', 'rancid']
 let showModal = false
+let allItems = []
+let sortToggle = false
 
 $(document).ready(() => {
   loadItems()
@@ -138,6 +140,7 @@ const resetModal = () => {
 }
 
 const reRenderAllItems = (items) => {
+  allItems = items
   $('.item-list').empty()
   items.forEach(item => {
     displayInGarage(item)
@@ -179,6 +182,16 @@ const deleteItem = (id) => {
   .then(items => reRenderAllItems(items))
   toggleModal()
 }
+
+$('.sort-items-btn').on('click', () => {
+  if(!sortToggle) {
+    reRenderAllItems(sortABC(allItems))
+    sortToggle = !sortToggle
+  } else {
+    reRenderAllItems(sortCBA(allItems))
+    sortToggle = !sortToggle
+  }
+})
 
 $('.close-modal-btn').on('click', () => {
   toggleModal()
