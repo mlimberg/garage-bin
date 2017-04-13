@@ -10,7 +10,9 @@ const sortCBA = (items) => {
   })
 }
 
-module.exports = {
-  sortABC,
-  sortCBA
+if(typeof module !== 'undefined') {
+  module.exports = {
+    sortABC,
+    sortCBA
+  }
 }
