@@ -1,5 +1,6 @@
 let stats = { sparkling: 0, dusty: 0, rancid: 0}
-let quality = ['sparkling', 'dusty', 'rancid']
+const quality = ['sparkling', 'dusty', 'rancid']
+let showModal = false
 
 $(document).ready(() => {
   loadItems()
@@ -8,26 +9,7 @@ $(document).ready(() => {
 const loadItems = () => {
   fetch('/api/v1/items')
   .then(res => res.json())
-  .then(items => {
-    items.forEach(item => {
-      displayInGarage(item)
-      stats[item.quality]++
-      updateStats()
-    })
-  })
-}
-
-const updateStats = () => {
-  Object.keys(stats).forEach(stat => {
-    $(`.number-of-${stat}`).text(stats[stat])
-  })
-
-  const total = Object.keys(stats).reduce((sum, stat) => {
-    sum += stats[stat]
-    return sum
-  }, 0)
-
-  $('.total-items').text(total)
+  .then(items => reRenderAllItems(items))
 }
 
 class NewItem {
@@ -60,20 +42,15 @@ const submitItem = () => {
     const quality = $('.cleanliness-selector').val()
     const item = new NewItem(name, purpose, quality)
 
-    addItemToGarage(item)
+    addToStorage(item)
     resetInputs()
   }
 }
 
-const addItemToGarage = (item) => {
-  displayInGarage(item)
-  addToStorage(item)
-}
-
 const displayInGarage = (item) => {
   $('.item-list').append(`
-    <li class='item'>${item.name}</li>
-    `)
+    <li class='item' id='${item.id}'>${item.name}</li>
+  `)
 }
 
 const addToStorage = (item) => {
@@ -83,10 +60,7 @@ const addToStorage = (item) => {
     body: JSON.stringify({ item })
   })
   .then(res => res.json())
-  .then(items => {
-    $('.item-list').empty()
-    items.forEach(item => displayInGarage(item))
-  })
+  .then(items => reRenderAllItems(items))
 }
 
 const enableButton = () => {
@@ -105,4 +79,91 @@ $('.add-item-input').on('keydown', (e) => {
   if(e.keyCode === 13) {
     submitItem()
   }
+})
+
+$('.item-list').on('click', '.item', (e) => {
+  const itemID = e.target.id
+  toggleModal()
+  getItemData(itemID)
+})
+
+const getItemData = (id) => {
+  fetch(`/api/v1/items/${id}`)
+  .then(res => res.json())
+  .then(item => displayOnModal(item))
+}
+
+const displayOnModal = (item) => {
+  $('.modal-name').text(item.name)
+  $('.modal-purpose').text(item.purpose)
+  $('.modal-selector').val(item.quality)
+  $('.modal').attr('id', item.id)
+}
+
+$('.modal-save-btn').on('click', (e) => {
+  const name = $('.modal-name').text()
+  const purpose = $('.modal-purpose').text()
+  const quality = $('.modal-selector').val()
+  const id = parseInt(e.target.closest('.modal').id)
+  const item = { id, name, purpose, quality }
+  updateItem(item)
+  toggleModal()
+})
+
+const updateItem = (item) => {
+  fetch(`/api/v1/items/${item.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({updatedItem: item})
+  })
+  .then(res => res.json())
+  .then(items => reRenderAllItems(items))
+}
+
+const toggleModal = () => {
+  if(!showModal) {
+    $('.modal').removeClass('hidden')
+    showModal = true
+  } else {
+    $('.modal').addClass('hidden')
+    showModal = false
+    resetModal()
+  }
+}
+
+const resetModal = () => {
+  $('.modal').attr('id', '')
+  $('.modal-name').text('')
+  $('.modal-name').text('')
+}
+
+const reRenderAllItems = (items) => {
+  $('.item-list').empty()
+  items.forEach(item => {
+    displayInGarage(item)
+  })
+  updateStats(items)
+}
+
+const updateStats = (items) => {
+  stats = { sparkling: 0, dusty: 0, rancid: 0}
+  items.forEach(item => {
+    stats[item.quality]++
+  })
+
+  Object.keys(stats).forEach(stat => {
+    $(`.number-of-${stat}`).text('')
+    $(`.number-of-${stat}`).text(stats[stat])
+  })
+
+  const total = Object.keys(stats).reduce((sum, stat) => {
+    sum += stats[stat]
+    return sum
+  }, 0)
+
+  $('.total-items').text(total)
+}
+
+$('.close-modal-btn').on('click', () => {
+  toggleModal()
 })

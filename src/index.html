@@ -37,16 +37,28 @@
           <input class='add-item-input item-input' placeholder='Item' />
           <input class='add-item-input purpose-input' placeholder='Purpose' />
           <select class='cleanliness-selector'>
-            <option value='rancid'>Rancid</option>
-            <option value='dusty' selected='selected'>Dusty</option>
             <option value='sparkling'>Sparkling</option>
+            <option value='dusty' selected='selected'>Dusty</option>
+            <option value='rancid'>Rancid</option>
           </select>
           <button class='btn add-item-btn' disabled >Add</button>
         </section>
 
       </div>
       <!-- end of garage section -->
-
+      <div class='modal hidden'>
+        <div class='close-modal-btn'>✕</div>
+        <label>Name: <span class='modal-name' contenteditable='true'></span></label>
+        <label>Purpose: <span class='modal-purpose' contenteditable='true'></span></label>
+        <label>Quality:
+          <select class='modal-selector'>
+            <option value='sparkling'>Sparkling</option>
+            <option value='dusty'>Dusty</option>
+            <option value='rancid'>Rancid</option>
+          </select>
+        </label>
+        <button class='btn modal-save-btn'>Save</button>
+      </div>
     </div>
 
     <section class='garage-door-controls'>
