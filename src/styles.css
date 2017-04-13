@@ -17,10 +17,14 @@
   align-self: center;
   width: 100%;
   justify-content: space-around;
-  background-color: rgba(200,200,200,.5);
+  align-items: center;
+  background-color: rgba(200,200,200,1);
   position: absolute;
   bottom: 0;
+  height: 8vh;
 }
+
+
 
 .garage-door-controls {
   display: flex;
@@ -32,7 +36,7 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
-  background-color: rgba(200,200,200,.5);
+  background-color: rgba(200,200,200, 1);
 }
 
 .number-by-type-title {
@@ -56,6 +60,7 @@
 
 .item-list {
   width: 100%;
+  overflow: scroll;
 }
 
 .item {
