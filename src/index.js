@@ -111,7 +111,14 @@ $('.add-item-input').on('keydown', (e) => {
 $('.item-list').on('click', '.item', (e) => {
   const itemID = e.target.id
   toggleModal()
+  getItemData(itemID)
 })
+
+const getItemData = (id) => {
+  fetch(`/api/v1/items/${id}`)
+  .then(res => res.json())
+  .then(item => console.log(item))
+}
 
 const toggleModal = () => {
   if(!showModal) {

@@ -35,6 +35,13 @@ app.get('/api/v1/items', (request, response) => {
   response.status(200).send(app.locals.items)
 })
 
+app.get('/api/v1/items/:id', (request, response) => {
+  const { id } = request.params
+  const currentItem = app.locals.items.find(item => item.id == parseInt(id))
+
+  response.status(200).send(currentItem)
+})
+
 app.post('/api/v1/items', (request, response) => {
   const { item } = request.body
   const { items } = app.locals
