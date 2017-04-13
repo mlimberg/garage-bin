@@ -3,6 +3,7 @@ const quality = ['sparkling', 'dusty', 'rancid']
 let showModal = false
 let allItems = []
 let sortToggle = false
+let garageClosed = true
 
 $(document).ready(() => {
   loadItems()
@@ -192,8 +193,21 @@ $('.sort-items-btn').on('click', () => {
     reRenderAllItems(sortCBA(allItems))
     sortToggle = !sortToggle
     $('.sort-items-btn').text('Sort A-Z')
-
   }
+})
+
+$('.open-garage-btn').on('click', () => {
+  if(garageClosed) {
+    $('.garage-door').removeClass('slideDown')
+    $('.garage-door').addClass('slideUp')
+    garageClose = false
+  }
+})
+
+$('.close-garage-btn').on('click', () => {
+  $('.garage-door').removeClass('slideUp')
+  $('.garage-door').addClass('slideDown')
+  garageClose = true
 })
 
 $('.close-modal-btn').on('click', () => {

@@ -4,6 +4,7 @@
   border-radius: 5px;
   padding: 0px 10px;
   font-size: 12px;
+  outline: none;
 }
 
 .btn:hover {
@@ -13,6 +14,7 @@
 .btn:hover:disabled, .btn:disabled {
   cursor: default;
 }
+
 
 input {
   height: 25px;
@@ -59,9 +61,11 @@ input {
 }
 
 .garage-door-controls {
+  width: 10vw;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-self: center;
+  margin: auto;
 }
 
 .garage-stats {
@@ -165,4 +169,45 @@ input {
 .modal-btns {
   width: 50%;
   justify-content: space-around;
+}
+
+.garage-door {
+  position: absolute;
+  background-color: black;
+  z-index: 100;
+  margin: auto;
+  left: 0px;
+  right: 0px;
+  top: 20px;
+  margin-top; -20px;
+  width: 82vw;
+  height: 82vh;
+}
+
+.slideUp{
+	animation-name: slideUp;
+	animation-duration: 3s;
+	animation-timing-function: ease-in-out;
+	visibility: visible !important;
+  animation-fill-mode:forwards;
+}
+
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%)
+  }
+}
+
+.slideDown {
+  animation-name: slideDown;
+  animation-duration: 6s;
+	animation-timing-function: ease-in-out;
+	visibility: visible !important;
+  animation-fill-mode:forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%)
+  }
 }
