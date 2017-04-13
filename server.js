@@ -54,6 +54,20 @@ app.post('/api/v1/items', (request, response) => {
   }
 })
 
+app.put('/api/v1/items/:id', (request, response) => {
+  const { id } = request.params
+  const { updatedItem } = request.body
+  const updated = app.locals.items.map(item => {
+    if(item.id === parseInt(id)) {
+      item = updatedItem
+    }
+    return item
+  })
+  app.locals.items = updated
+  console.log(app.locals.items);
+  response.status(200).send(app.locals.items)
+})
+
 if(!module.parent) {
   app.listen(app.get('port'), () => {
     console.log(`It\'s lit AF over at ${app.get('port')}`);

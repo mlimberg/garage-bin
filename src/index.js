@@ -6,16 +6,22 @@ $(document).ready(() => {
   loadItems()
 })
 
+// const loadItems = () => {
+//   fetch('/api/v1/items')
+//   .then(res => res.json())
+//   .then(items => {
+//     items.forEach(item => {
+//       displayInGarage(item)
+//       stats[item.quality]++
+//       updateStats()
+//     })
+//   })
+// }
+
 const loadItems = () => {
   fetch('/api/v1/items')
   .then(res => res.json())
-  .then(items => {
-    items.forEach(item => {
-      displayInGarage(item)
-      stats[item.quality]++
-      updateStats()
-    })
-  })
+  .then(items => reRenderAllItems(items))
 }
 
 const updateStats = () => {
@@ -117,7 +123,34 @@ $('.item-list').on('click', '.item', (e) => {
 const getItemData = (id) => {
   fetch(`/api/v1/items/${id}`)
   .then(res => res.json())
-  .then(item => console.log(item))
+  .then(item => displayOnModal(item))
+}
+
+const displayOnModal = (item) => {
+  $('.modal-name').text(item.name)
+  $('.modal-purpose').text(item.purpose)
+  $('.modal-selector').val(item.quality)
+  $('.modal').attr('id', item.id)
+}
+
+$('.modal-save-btn').on('click', (e) => {
+  const name = $('.modal-name').text()
+  const purpose = $('.modal-purpose').text()
+  const quality = $('.modal-selector').val()
+  const id = parseInt(e.target.closest('.modal').id)
+  const item = { id, name, purpose, quality }
+  updateItem(item)
+  toggleModal()
+})
+
+const updateItem = (item) => {
+  fetch(`/api/v1/items/${item.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({updatedItem: item})
+  })
+  .then(res => res.json())
+  .then(items => reRenderAllItems(items))
 }
 
 const toggleModal = () => {
@@ -127,7 +160,21 @@ const toggleModal = () => {
   } else {
     $('.modal').addClass('hidden')
     showModal = false
+    resetModal()
   }
+}
+
+const resetModal = () => {
+  $('.modal').attr('id', '')
+  $('.modal-name').text('')
+  $('.modal-name').text('')
+}
+
+const reRenderAllItems = (items) => {
+  $('.item-list').empty()
+  items.forEach(item => {
+    displayInGarage(item)
+  })
 }
 
 $('.close-modal-btn').on('click', () => {
