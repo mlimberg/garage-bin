@@ -1,9 +1,24 @@
+.btn {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-size: 12px;
+}
+
 .btn:hover {
   cursor: pointer;
 }
 
 .btn:hover:disabled, .btn:disabled {
   cursor: default;
+}
+
+input {
+  height: 25px;
+  border: none;
+  font-size: 14px;
+  padding: 2.5px;
 }
 
 .garage-door, .garage {
@@ -30,6 +45,17 @@
   position: absolute;
   bottom: 0;
   height: 8vh;
+}
+
+.add-item-form {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.add-item-form label {
+  display: flex;
+  align-items: center;
 }
 
 .garage-door-controls {
@@ -133,7 +159,7 @@
 }
 
 .purpose-input {
-  width: 300px;
+  width: 50%;
 }
 
 .modal-btns {
