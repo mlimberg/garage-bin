@@ -9,3 +9,8 @@ const sortCBA = (items) => {
     return itemB.name > itemA.name
   })
 }
+
+module.exports = {
+  sortABC,
+  sortCBA
+}
