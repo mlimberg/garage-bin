@@ -1,5 +1,6 @@
 let stats = { sparkling: 0, dusty: 0, rancid: 0}
-let quality = ['sparkling', 'dusty', 'rancid']
+const quality = ['sparkling', 'dusty', 'rancid']
+let showModal = false
 
 $(document).ready(() => {
   loadItems()
@@ -72,7 +73,7 @@ const addItemToGarage = (item) => {
 
 const displayInGarage = (item) => {
   $('.item-list').append(`
-    <li class='item'>${item.name}</li>
+    <li class='item' id='${item.id}'>${item.name}</li>
     `)
 }
 
@@ -107,6 +108,21 @@ $('.add-item-input').on('keydown', (e) => {
   }
 })
 
-$('.item-list').on('click', '.item', () => {
-  console.log(this);
+$('.item-list').on('click', '.item', (e) => {
+  const itemID = e.target.id
+  toggleModal()
+})
+
+const toggleModal = () => {
+  if(!showModal) {
+    $('.modal').removeClass('hidden')
+    showModal = true
+  } else {
+    $('.modal').addClass('hidden')
+    showModal = false
+  }
+}
+
+$('.close-modal-btn').on('click', () => {
+  toggleModal()
 })

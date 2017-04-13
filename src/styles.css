@@ -74,3 +74,39 @@
   cursor: pointer;
   background-color: lightgreen;
 }
+
+.modal {
+  position: absolute;
+  width: 450px;
+  height: 300px;
+  z-index: 10;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 25%;
+  left: 0;
+  background-color: #FFF;
+  box-shadow: 3px 3px 15px 2px rgba(173,170,173,1);
+}
+
+.close-modal-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: gray;
+  border-radius: 50%;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-modal-btn:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
