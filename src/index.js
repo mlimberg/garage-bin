@@ -1,6 +1,8 @@
 let stats = { sparkling: 0, dusty: 0, rancid: 0}
 const quality = ['sparkling', 'dusty', 'rancid']
 let showModal = false
+let allItems = []
+let sortToggle = false
 
 $(document).ready(() => {
   loadItems()
@@ -138,6 +140,7 @@ const resetModal = () => {
 }
 
 const reRenderAllItems = (items) => {
+  allItems = items
   $('.item-list').empty()
   items.forEach(item => {
     displayInGarage(item)
@@ -163,6 +166,35 @@ const updateStats = (items) => {
 
   $('.total-items').text(total)
 }
+
+$('.modal-delete-btn').on('click', (e) => {
+  const id = parseInt(e.target.closest('.modal').id)
+  console.log('id ', id);
+  deleteItem(id)
+})
+
+const deleteItem = (id) => {
+  fetch(`/api/v1/items/${id}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'}
+  })
+  .then(res => res.json())
+  .then(items => reRenderAllItems(items))
+  toggleModal()
+}
+
+$('.sort-items-btn').on('click', () => {
+  if(!sortToggle) {
+    reRenderAllItems(sortABC(allItems))
+    sortToggle = !sortToggle
+    $('.sort-items-btn').text('Sort Z-A')
+  } else {
+    reRenderAllItems(sortCBA(allItems))
+    sortToggle = !sortToggle
+    $('.sort-items-btn').text('Sort A-Z')
+
+  }
+})
 
 $('.close-modal-btn').on('click', () => {
   toggleModal()

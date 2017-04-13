@@ -64,7 +64,15 @@ app.put('/api/v1/items/:id', (request, response) => {
     return item
   })
   app.locals.items = updated
-  console.log(app.locals.items);
+  response.status(200).send(app.locals.items)
+})
+
+app.delete('/api/v1/items/:id', (request, response) => {
+  const { id } = request.params
+  const updated = app.locals.items.filter(item => {
+    return item.id !== parseInt(id)
+  })
+  app.locals.items = updated
   response.status(200).send(app.locals.items)
 })
 

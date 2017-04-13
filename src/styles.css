@@ -101,7 +101,7 @@
   justify-content: space-around;
 }
 
-.modal label {
+.modal label, .modal-btns {
   display: flex;
   flex-direction: row;
 }
@@ -130,4 +130,9 @@
 
 .modal-name:hover, .modal-purpose:hover {
   cursor: text;
+}
+
+.modal-btns {
+  width: 50%;
+  justify-content: space-around;
 }
