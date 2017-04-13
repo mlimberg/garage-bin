@@ -3,8 +3,12 @@ $(document).ready(() => {
 })
 
 const loadItems = () => {
-  const items = JSON.parse(localStorage.getItem('items'))
-  items.forEach(item => displayInGarage(item))
+  fetch('/api/v1/items')
+  .then(res => res.json())
+  .then(items => {
+    console.log(items);
+    items.forEach(item => displayInGarage(item))
+  })
 }
 
 class NewItem {
@@ -16,13 +20,20 @@ class NewItem {
   }
 }
 
-$('.add-item-btn').on('click', () => {
-  const name = $('.item-input').val()
-  const purpose = $('.purpose-input').val()
-  const quality = $('.cleanliness-selector').val()
-  const item = new NewItem(name, purpose, quality)
+const checkInputs = () => {
+  return $('.item-input').val() && $('.purpose-input').val() ? true : false
+}
 
-  addItemToGarage(item)
+$('.add-item-btn').on('click', () => {
+  if(checkInputs()) {
+    console.log('yup!');
+    const name = $('.item-input').val()
+    const purpose = $('.purpose-input').val()
+    const quality = $('.cleanliness-selector').val()
+    const item = new NewItem(name, purpose, quality)
+
+    addItemToGarage(item)
+  }
 })
 
 const addItemToGarage = (item) => {
@@ -45,3 +56,15 @@ const addToStorage = (item) => {
   .then(res => res.json())
   .then(items => localStorage.setItem('items', JSON.stringify(items)))
 }
+
+const enableButton = () => {
+  $('.add-item-btn').prop('disabled', false)
+}
+
+const disableButton = () => {
+  $('.add-item-btn').prop('disabled', true)
+}
+
+$('.add-item-input').on('keyup', () => {
+  return checkInputs() ? enableButton() : disableButton()
+})
