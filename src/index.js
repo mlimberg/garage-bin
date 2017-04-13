@@ -106,3 +106,7 @@ $('.add-item-input').on('keydown', (e) => {
     submitItem()
   }
 })
+
+$('.item-list').on('click', '.item', () => {
+  console.log(this);
+})

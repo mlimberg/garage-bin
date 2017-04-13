@@ -24,8 +24,6 @@
   height: 8vh;
 }
 
-
-
 .garage-door-controls {
   display: flex;
   flex-direction: row;
@@ -70,4 +68,9 @@
   padding: 5px;
   border-radius: 5px;
   margin: 2px auto;
+}
+
+.item:hover {
+  cursor: pointer;
+  background-color: lightgreen;
 }
