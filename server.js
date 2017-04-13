@@ -21,6 +21,8 @@ app.use(express.static('src'));
 
 app.set('port', process.env.PORT || 3000);
 
+app.locals.items = [];
+
 app.get('/', (request, response) => {
   fs.readFile(`${_dirname}/index.html`, (err, file) => {
     response.send(file)
@@ -53,22 +55,15 @@ app.get('/', (request, response) => {
 //     })
 // })
 //
-// app.post('/api/v1/folders', (request, response) => {
-//   const { folder } = request.body
-//   const newFolder = { name: folder }
-//
-//   database('folders').insert(newFolder)
-//   .then(()=> {
-//     database('folders').select()
-//       .then((folders) => {
-//         response.status(200).json(folders);
-//       })
-//       .catch((error) => {
-//         console.error('somethings wrong with db')
-//       });
-//   })
-// })
-//
+app.post('/api/v1/items', (request, response) => {
+  const { item } = request.body
+  const { items } = app.locals
+
+  items.push(item)
+  response.status(200).send(items)
+  console.log(items);
+})
+
 // app.post('/api/v1/folders/:id', (request, response) => {
 //   const { id } = request.params
 //   const { longURL } = request.body

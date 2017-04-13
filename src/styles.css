@@ -6,9 +6,18 @@
 
 .garage {
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
 }
 
 .add-item-container {
   display: flex;
   flex-direction: row;
+  align-self: flex-end;
+}
+
+.garage-door-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
