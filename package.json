@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha ./test/**.js || true",
+    "test": "node_modules/.bin/mocha ./tests/**.js || true",
     "start": "node server.js"
   },
   "keywords": [],
