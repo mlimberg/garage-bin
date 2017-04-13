@@ -11,7 +11,24 @@
 
     <div class='garage-door'>
       <div class='garage'>
+        <section class='garage-stats'>
+          <label class='number-of-items-title'>
+            Number of Items:
+            <div class='number-of-items'></div>
+          </label>
+          <label class='number-by-type-title'>
+            Items by Cleanliness:
+            <label>Sparkling: <span class='number-of-sparkling'></span></label>
+            <label>Dusty: <span class='number-of-dusty'></span></label>
+            <label>Rancid: <span class='number-of-rancid'></span></label>
+          </label>
+        </section>
+
         <section class='item-list-container'>
+          <div class='item-display-header'>
+            <h2>Items</h2>
+            <button class='sort-items-btn btn'>A-Z</button>
+          </div>
           <ul class='item-list'>
           </ul>
         </section>
@@ -28,6 +45,8 @@
         </section>
 
       </div>
+      <!-- end of garage section -->
+
     </div>
 
     <section class='garage-door-controls'>

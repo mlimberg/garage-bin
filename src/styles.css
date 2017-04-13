@@ -1,23 +1,53 @@
 .garage-door, .garage {
   width: 80vw;
   height: 80vh;
-  margin: 50px auto;
+  margin: 20px auto;
 }
 
 .garage {
   border: 1px solid black;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  position: relative;
 }
 
 .add-item-container {
   display: flex;
   flex-direction: row;
-  align-self: flex-end;
+  align-self: center;
+  width: 100%;
+  justify-content: space-around;
+  background-color: rgba(200,200,200,.5);
+  position: absolute;
+  bottom: 0;
 }
 
 .garage-door-controls {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.garage-stats {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background-color: rgba(200,200,200,.5);
+}
+
+.number-by-type-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-list-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-top: 10px;
+}
+
+.item-display-header {
+  display: flex;
+  flex-direction: row;
 }
