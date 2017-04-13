@@ -3,7 +3,8 @@ $(document).ready(() => {
 })
 
 const loadItems = () => {
-  console.log('items loaded!')
+  const items = JSON.parse(localStorage.getItem('items'))
+  items.forEach(item => displayInGarage(item))
 }
 
 class NewItem {
@@ -31,7 +32,7 @@ const addItemToGarage = (item) => {
 
 const displayInGarage = (item) => {
   $('.item-list').append(`
-    <li>${item.name}</li>
+    <li class='item'>${item.name}</li>
     `)
 }
 
@@ -42,5 +43,5 @@ const addToStorage = (item) => {
     body: JSON.stringify({ item })
   })
   .then(res => res.json())
-  .then(items => console.log(items))
+  .then(items => localStorage.setItem('items', JSON.stringify(items)))
 }
