@@ -164,6 +164,22 @@ const updateStats = (items) => {
   $('.total-items').text(total)
 }
 
+$('.modal-delete-btn').on('click', (e) => {
+  const id = parseInt(e.target.closest('.modal').id)
+  console.log('id ', id);
+  deleteItem(id)
+})
+
+const deleteItem = (id) => {
+  fetch(`/api/v1/items/${id}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'}
+  })
+  .then(res => res.json())
+  .then(items => reRenderAllItems(items))
+  toggleModal()
+}
+
 $('.close-modal-btn').on('click', () => {
   toggleModal()
 })
