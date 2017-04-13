@@ -1,3 +1,10 @@
+body {
+  /*background-color: #ccc;*/
+  background-image: url('bricks.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .btn {
   height: 30px;
   border: none;
@@ -30,7 +37,7 @@ input {
 }
 
 .garage {
-  border: 1px solid black;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -173,7 +180,9 @@ input {
 
 .garage-door {
   position: absolute;
-  background-color: black;
+  background-image: url('garage-door.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   z-index: 100;
   margin: auto;
   left: 0px;
@@ -186,7 +195,7 @@ input {
 
 .slideUp{
 	animation-name: slideUp;
-	animation-duration: 3s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	visibility: visible !important;
   animation-fill-mode:forwards;
