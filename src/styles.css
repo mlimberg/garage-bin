@@ -132,6 +132,10 @@
   cursor: text;
 }
 
+.purpose-input {
+  width: 300px;
+}
+
 .modal-btns {
   width: 50%;
   justify-content: space-around;
