@@ -6,35 +6,10 @@ $(document).ready(() => {
   loadItems()
 })
 
-// const loadItems = () => {
-//   fetch('/api/v1/items')
-//   .then(res => res.json())
-//   .then(items => {
-//     items.forEach(item => {
-//       displayInGarage(item)
-//       stats[item.quality]++
-//       updateStats()
-//     })
-//   })
-// }
-
 const loadItems = () => {
   fetch('/api/v1/items')
   .then(res => res.json())
   .then(items => reRenderAllItems(items))
-}
-
-const updateStats = () => {
-  Object.keys(stats).forEach(stat => {
-    $(`.number-of-${stat}`).text(stats[stat])
-  })
-
-  const total = Object.keys(stats).reduce((sum, stat) => {
-    sum += stats[stat]
-    return sum
-  }, 0)
-
-  $('.total-items').text(total)
 }
 
 class NewItem {
@@ -67,20 +42,15 @@ const submitItem = () => {
     const quality = $('.cleanliness-selector').val()
     const item = new NewItem(name, purpose, quality)
 
-    addItemToGarage(item)
+    addToStorage(item)
     resetInputs()
   }
-}
-
-const addItemToGarage = (item) => {
-  displayInGarage(item)
-  addToStorage(item)
 }
 
 const displayInGarage = (item) => {
   $('.item-list').append(`
     <li class='item' id='${item.id}'>${item.name}</li>
-    `)
+  `)
 }
 
 const addToStorage = (item) => {
@@ -90,10 +60,7 @@ const addToStorage = (item) => {
     body: JSON.stringify({ item })
   })
   .then(res => res.json())
-  .then(items => {
-    $('.item-list').empty()
-    items.forEach(item => displayInGarage(item))
-  })
+  .then(items => reRenderAllItems(items))
 }
 
 const enableButton = () => {
@@ -175,6 +142,26 @@ const reRenderAllItems = (items) => {
   items.forEach(item => {
     displayInGarage(item)
   })
+  updateStats(items)
+}
+
+const updateStats = (items) => {
+  stats = { sparkling: 0, dusty: 0, rancid: 0}
+  items.forEach(item => {
+    stats[item.quality]++
+  })
+
+  Object.keys(stats).forEach(stat => {
+    $(`.number-of-${stat}`).text('')
+    $(`.number-of-${stat}`).text(stats[stat])
+  })
+
+  const total = Object.keys(stats).reduce((sum, stat) => {
+    sum += stats[stat]
+    return sum
+  }, 0)
+
+  $('.total-items').text(total)
 }
 
 $('.close-modal-btn').on('click', () => {
