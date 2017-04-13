@@ -187,9 +187,12 @@ $('.sort-items-btn').on('click', () => {
   if(!sortToggle) {
     reRenderAllItems(sortABC(allItems))
     sortToggle = !sortToggle
+    $('.sort-items-btn').text('Sort Z-A')
   } else {
     reRenderAllItems(sortCBA(allItems))
     sortToggle = !sortToggle
+    $('.sort-items-btn').text('Sort A-Z')
+
   }
 })
 
