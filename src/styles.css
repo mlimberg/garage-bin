@@ -1,8 +1,14 @@
 body {
-  /*background-color: #ccc;*/
   background-image: url('bricks.png');
   background-size: cover;
   background-repeat: no-repeat;
+  font-family: 'Mukta Vaani', sans-serif;
+  font-weight: 300;
+  color: #333333;
+}
+
+label {
+  padding: 1.5px;
 }
 
 .btn {
@@ -10,24 +16,31 @@ body {
   border: none;
   border-radius: 5px;
   padding: 0px 10px;
-  font-size: 12px;
+  font-size: 13px;
   outline: none;
+  background-color: #f6eb59;
 }
 
 .btn:hover {
   cursor: pointer;
+  background-color: #ffbd69;
+  color: #333;
+
 }
 
-.btn:hover:disabled, .btn:disabled {
+.btn:disabled:hover, .btn:disabled {
+  background-color: inherit;
   cursor: default;
+  color: #333;
 }
-
 
 input {
   height: 25px;
   border: none;
   font-size: 14px;
   padding: 2.5px;
+  font-weight: lighter;
+  outline: none;
 }
 
 .garage-door, .garage {
@@ -37,7 +50,7 @@ input {
 }
 
 .garage {
-  background-color: #fff;
+  background-color: #333333;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -79,7 +92,15 @@ input {
   display: flex;
   width: 100%;
   justify-content: space-around;
+  align-items: flex-start;
   background-color: rgba(200,200,200, 1);
+  height: 12vh;
+  padding: 10px 0px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .number-by-type-title {
@@ -99,6 +120,30 @@ input {
 .item-display-header {
   display: flex;
   flex-direction: row;
+  width: 51%;
+  background-color: #ffbd69;
+  padding: 5px;
+  justify-content: center;;
+  align-items: center;
+  position: relative;
+  margin-top: 20px;
+}
+
+.item-display-header h2 {
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.sort-items-btn {
+  position: absolute;
+  right: 5px;
+  background-color: #ffbd69;
+  color: #333;
+}
+
+.sort-items-btn:hover {
+  background-color: #f6eb59;
+  color: #333;
 }
 
 .item-list {
@@ -107,17 +152,20 @@ input {
 }
 
 .item {
-  width: 60%;
+  width: 50%;
   text-align: center;
-  border: 1px solid red;
-  padding: 5px;
+  border: 1px solid #ffbd69;
+  padding: 8px;
   border-radius: 5px;
-  margin: 2px auto;
+  margin: 5px auto;
+  background-color: #f4f4f4;
 }
 
 .item:hover {
   cursor: pointer;
-  background-color: lightgreen;
+  transition-duration: .5s ease-in-out;
+  transform: scale(1.05);
+  background-color: #ffbd69;
 }
 
 .modal {
@@ -131,11 +179,16 @@ input {
   bottom: 25%;
   left: 0;
   background-color: #FFF;
-  box-shadow: 3px 3px 15px 2px rgba(173,170,173,1);
+  box-shadow: 3px 3px 10px 2px rgba(173,170,173,.5);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
+
+.modal-label {
+  margin-right: 5px;
+  font-weight: 500;
 }
 
 .modal label, .modal-btns {
@@ -147,7 +200,7 @@ input {
   position: absolute;
   right: 15px;
   top: 15px;
-  background-color: gray;
+  background-color: #f6eb59;
   border-radius: 50%;
   padding: 5px;
   width: 20px;
@@ -155,10 +208,12 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 2px;
 }
 
 .close-modal-btn:hover {
   cursor: pointer;
+  background-color: #ffbd69;
 }
 
 .hidden {
@@ -176,6 +231,14 @@ input {
 .modal-btns {
   width: 50%;
   justify-content: space-around;
+}
+
+.total-items {
+  text-align: center;
+}
+
+.number-by-type-title label {
+  text-align: center;
 }
 
 .garage-door {
