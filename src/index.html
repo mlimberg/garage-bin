@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Garage Bin</title>
-    <link href="https://fonts.googleapis.com/css?family=Nosifer|Noto+Sans|Ruda|Stalinist+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani:200,300,400,600" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -14,12 +14,12 @@
 
       <div class='garage'>
         <section class='garage-stats'>
-          <label class='number-of-items-title'>
-            Number of Items:
-            <div class='total-items'></div>
+          <label class='number-of-items-title title'>
+            <span class='title'>Number of Items:</span>
+            <span class='total-items'></span>
           </label>
           <label class='number-by-type-title'>
-            Items by Cleanliness:
+            <span class='title'> Items by Cleanliness: </span>
             <label>Sparkling: <span class='number-of-sparkling'></span></label>
             <label>Dusty: <span class='number-of-dusty'></span></label>
             <label>Rancid: <span class='number-of-rancid'></span></label>
@@ -55,9 +55,9 @@
       <!-- end of garage section -->
       <div class='modal hidden'>
         <div class='close-modal-btn'>✕</div>
-        <label>Name: <span class='modal-name' contenteditable='true'></span></label>
-        <label>Purpose: <span class='modal-purpose' contenteditable='true'></span></label>
-        <label>Quality:
+        <label><span class='modal-label'>Name: </span><span class='modal-name' contenteditable='true'></span></label>
+        <label><span class='modal-label'>Purpose: </span><span class='modal-purpose' contenteditable='true'></span></label>
+        <label><span class='modal-label'>Quality: </span>
           <select class='modal-selector'>
             <option value='sparkling'>Sparkling</option>
             <option value='dusty'>Dusty</option>

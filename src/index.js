@@ -170,7 +170,6 @@ const updateStats = (items) => {
 
 $('.modal-delete-btn').on('click', (e) => {
   const id = parseInt(e.target.closest('.modal').id)
-  console.log('id ', id);
   deleteItem(id)
 })
 
@@ -185,14 +184,16 @@ const deleteItem = (id) => {
 }
 
 $('.sort-items-btn').on('click', () => {
-  if(!sortToggle) {
-    reRenderAllItems(sortABC(allItems))
-    sortToggle = !sortToggle
-    $('.sort-items-btn').text('Sort Z-A')
-  } else {
-    reRenderAllItems(sortCBA(allItems))
-    sortToggle = !sortToggle
-    $('.sort-items-btn').text('Sort A-Z')
+  if(allItems.length > 0) {
+    if(!sortToggle) {
+      reRenderAllItems(sortABC(allItems))
+      sortToggle = !sortToggle
+      $('.sort-items-btn').text('Sort Z-A')
+    } else {
+      reRenderAllItems(sortCBA(allItems))
+      sortToggle = !sortToggle
+      $('.sort-items-btn').text('Sort A-Z')
+    }
   }
 })
 
